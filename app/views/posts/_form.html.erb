@@ -1,1 +1,18 @@
 
+<%= form_for @post do |form| %>
+<br>
+  <%= form.label "Title" %>
+  <%= form.text_field :title %>
+  <br>
+  <%= form.label "Content" %>
+  <%= form.text_area :content %>
+  <br>
+  <%= form.collection_check_boxes :category_ids, Category.all, :id, :name %>
+  <br>
+  <%= form.fields_for :categories, post.categories.build do |categories_fields| %>
+    <%= categories_fields.label :name, "Category" %>
+    <%= categories_fields.text_field :name %>
+  <% end %>
+  <br>
+  <%= form.submit %>
+<% end %>
